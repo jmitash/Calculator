@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -19,10 +21,45 @@ public class DankulatorFrame extends JFrame
         super("Dankulator");
 
 
-
         //JMenuBar
         JMenuBar jMenuBar = new JMenuBar();
-        JMenu fileMenu = new JMenu("File");
+        JMenu fileMenu = new JMenu("Stuff");
+        JMenuItem primeItem = new JMenuItem("Prime check");
+        fileMenu.add(primeItem);
+        primeItem.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent)
+            {
+                String input = JOptionPane.showInputDialog(this, "Please enter a number to check:");
+                int number = Integer.parseInt(input);
+
+                boolean isPrime = true;
+
+                for(int i = 0; i < Math.sqrt(number); i++)
+                {
+                    for(int j = 2; j < i; j++)
+                    {
+                        if (i % j == 0)
+                        {
+                            isPrime = false;
+                        }
+                    }
+                }
+
+                JOptionPane.showMessageDialog(DankulatorFrame.this, "" + number + (isPrime ? " is prime." : " is not prime."));
+            }
+        });
+        JMenuItem graphulatorItem = new JMenuItem("Graphulator");
+        graphulatorItem.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent)
+            {
+                new GraphulatorFrame().setVisible(true);
+            }
+        });
+        fileMenu.add(graphulatorItem);
         jMenuBar.add(fileMenu);
         this.setJMenuBar(jMenuBar);
 
@@ -75,5 +112,6 @@ public class DankulatorFrame extends JFrame
 
         this.pack();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
     }
 }

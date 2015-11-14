@@ -28,7 +28,7 @@ public class Main
         DankulatorFrame dankulatorFrame = new DankulatorFrame();
         dankulatorFrame.setVisible(true);
 
-        /*GraphulatorFrame graphulatorFrame = new GraphulatorFrame();
+/*        GraphulatorFrame graphulatorFrame = new GraphulatorFrame();
         graphulatorFrame.setVisible(true);*/
 
     }
