@@ -31,19 +31,16 @@ public class DankulatorFrame extends JFrame
             @Override
             public void actionPerformed(ActionEvent actionEvent)
             {
-                String input = JOptionPane.showInputDialog(this, "Please enter a number to check:");
+                String input = JOptionPane.showInputDialog("Please enter a number to check:");
                 int number = Integer.parseInt(input);
 
                 boolean isPrime = true;
 
-                for(int i = 0; i < Math.sqrt(number); i++)
+                for (int i = 2; i < Math.sqrt(number); i++)
                 {
-                    for(int j = 2; j < i; j++)
+                    if (number % i == 0)
                     {
-                        if (i % j == 0)
-                        {
-                            isPrime = false;
-                        }
+                        isPrime = false;
                     }
                 }
 
@@ -78,7 +75,7 @@ public class DankulatorFrame extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                if(e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2)
+                if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2)
                 {
                     int index = historyList.locationToIndex(e.getPoint());
                     expressionInputField.setText(expressionInputField.getText() + historyListModel.get(index).calculate());
@@ -99,7 +96,6 @@ public class DankulatorFrame extends JFrame
         centerPane.add(expressionInputField);
         centerPane.add(Box.createRigidArea(new Dimension(0, 10)));
         centerPane.add(new ButtonsPanel(historyList, historyListModel, expressionInputField));
-
 
 
         this.getContentPane().add(centerPane, BorderLayout.CENTER);
